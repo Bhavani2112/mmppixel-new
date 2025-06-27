@@ -3,11 +3,14 @@ package org.iitwf.lib;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
@@ -26,7 +29,8 @@ public class FrameworkLibrary {
 	{
 
 		// directory where output is to be printed
-		String reporterFilePath = System.getProperty("user.dir")+"//reports//MMPReport.html";
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+		String reporterFilePath = System.getProperty("user.dir")+"//reports//MMPReport"+timeStamp+".html";
 		File reporterFile = new File(reporterFilePath);
 		
 		ExtentSparkReporter spark = new ExtentSparkReporter(reporterFile);
@@ -83,6 +87,12 @@ public class FrameworkLibrary {
 		return prop;
 
 	}
-
+	@AfterSuite
+	public void cleanUp() {
+	    if (driver != null) {
+	        driver.quit();      
+	    }
+	    extent.flush();         
+	}
 
 }

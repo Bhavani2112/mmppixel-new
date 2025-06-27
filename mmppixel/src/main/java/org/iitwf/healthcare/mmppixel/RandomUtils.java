@@ -1,5 +1,6 @@
 package org.iitwf.healthcare.mmppixel;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class RandomUtils {
@@ -80,4 +81,56 @@ public class RandomUtils {
 		System.out.println(ch);
 		return ch;
 	}
+	public static String generateRandomNumberDigitOf(int length) {
+        if (length <= 0) {
+            throw new IllegalArgumentException("Digit count must be greater than 0.");
+        }
+        SecureRandom random = new SecureRandom();
+        StringBuilder number = new StringBuilder();
+
+        // First digit: 1–9 (to avoid leading zero)
+        number.append(random.nextInt(9) + 1);
+
+        // Remaining digits: 0–9
+        for (int i = 1; i < length; i++) {
+            number.append(random.nextInt(10));
+        }
+        return number.toString();
+    }
+	public static String generateRandomPassword(int length) {
+//        if (length < 8) {
+//            throw new IllegalArgumentException("Password length must be at least 8.");
+//        }
+        String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lower = "abcdefghijklmnopqrstuvwxyz";
+        String digits = "0123456789";
+        String allChars = upper + lower + digits + "!@#$%^&*()-_=+[]{}|:,.<>?";
+
+        SecureRandom random = new SecureRandom();
+        StringBuilder password = new StringBuilder();
+
+        // Ensure at least one lowercase, one uppercase, one digit
+        password.append(lower.charAt(random.nextInt(lower.length())));
+        password.append(upper.charAt(random.nextInt(upper.length())));
+        password.append(digits.charAt(random.nextInt(digits.length())));
+
+        // Fill the remaining characters
+        for (int i = 3; i < length; i++) {
+            password.append(allChars.charAt(random.nextInt(allChars.length())));
+        }
+
+        return password.toString(); 
+    }
+	public static String generateRandomEmailID(int length) {
+        String chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+        SecureRandom random = new SecureRandom();
+        StringBuilder email = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            email.append(chars.charAt(random.nextInt(chars.length())));
+        }
+
+        email.append("@example.com"); // You can change this domain as needed
+        return email.toString();
+    }
 }
