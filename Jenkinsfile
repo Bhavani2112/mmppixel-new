@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        git branch: "${params.branch_name}", url: 'https://github.com/sudheermca51/gitbash_repo.git'
+                        git branch: "${params.branch_name}", url: 'https://github.com/Bhavani2112/mmppixel-new.git'
                         bat label: 'mmpbatchscript', script: 'mmphealthcheck.bat'
                     } catch (err) {
                         echo "pixel_mmp_healthcheck job failed"
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Clone the repo into workspace
-                    git branch: "${params.branch_name}", url: 'https://github.com/sudheermca51/pixelmmp.git'
+                    git branch: "${params.branch_name}", url: 'https://github.com/Bhavani2112/mmppixel-new.git'
                     
                     // Navigate to mmppixel and run Maven
                     dir('mmppixel') {
