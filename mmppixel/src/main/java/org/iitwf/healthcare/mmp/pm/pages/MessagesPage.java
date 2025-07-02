@@ -22,8 +22,8 @@ public class MessagesPage {
 	public HashMap<String, String> sendMessage(String expectedPatientName, String expectedReason,String expectedMessage)
 	{
 		
-		String expectedDate = FutureDate.generateFutureDate(0, "dd-MM-yyyy", "Asia/Kolkata");
-	//	String expectedDate = FutureDate.generateFutureDate(0, "dd-MM-yyyy");
+	//	String expectedDate = FutureDate.generateFutureDate(0, "dd-MM-yyyy", "Asia/Kolkata");
+		String expectedDate = FutureDate.generateFutureDate(0, "dd-MM-yyyy");
 	//	String expectedDate = "02-07-2025";
 		driver.findElement(By.id("subject")).sendKeys(expectedReason);
 		driver.findElement(By.id("message")).sendKeys(expectedMessage);
